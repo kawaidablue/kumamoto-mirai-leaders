@@ -6,7 +6,9 @@ body{line-height:1.9}
 
 /* Hero (構成のみ参考: 左に傾けた写真カード／右にタイトル・英語名・日本語名・所属・経歴・URL。配色は既存ライト基調) */
 .ahero{position:relative;overflow:hidden;background:var(--white);padding:clamp(48px,7vw,96px) 0}
-.ahero .co-logo{position:absolute;top:clamp(14px,2.5vw,24px);right:clamp(14px,2.5vw,24px);z-index:5;width:clamp(120px,15vw,168px);height:auto;max-height:118px;object-fit:contain}
+.ahero-right{position:relative}
+.co-logo-pc{position:absolute;top:clamp(12px,2vw,22px);right:clamp(12px,2vw,26px);z-index:5;width:clamp(120px,15vw,168px);height:auto;max-height:118px;object-fit:contain}
+.namebox .co-logo{flex:0 0 auto;width:clamp(92px,24vw,116px);height:auto;object-fit:contain}
 .ahero-inner{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,40px);display:flex;align-items:center;gap:clamp(28px,5vw,72px);flex-wrap:wrap}
 .ahero-left{flex:0 0 clamp(280px,38%,420px);display:flex;justify-content:center;align-items:center}
 .ahero-photo{position:relative;width:100%;max-width:400px;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--white);border:1px solid var(--line);box-shadow:0 26px 54px rgba(23,55,100,.20);transform:rotate(-3deg)}
@@ -21,7 +23,7 @@ body{line-height:1.9}
 .ahero-right .lead{font-size:clamp(14px,2.4vw,15px);color:var(--ink);line-height:2.0;max-width:520px}
 .ahero-right .co-url{display:inline-block;margin-top:18px;font-family:var(--util);font-size:13px;color:var(--c);text-decoration:none;letter-spacing:.3px;border-bottom:1px solid var(--c);padding-bottom:1px;transition:color .2s,border-color .2s}
 .ahero-right .co-url:hover{color:var(--navy);border-color:var(--navy)}
-@media(max-width:720px){.ahero{padding:24px 0 32px}.ahero-inner{flex-direction:column;align-items:stretch;gap:22px}.ahero-left{flex:none}.ahero-photo{max-width:260px;margin:0 auto}.ahero-right{padding:0}.ahero-right .lead{max-width:none}.ahero .co-logo{width:clamp(84px,24vw,108px);top:10px;right:10px}}
+@media(max-width:720px){.ahero{padding:24px 0 32px}.ahero-inner{flex-direction:column;align-items:stretch;gap:22px}.ahero-left{flex:none;display:block}.ahero-photo{width:260px;max-width:100%;margin:0 auto}.ahero-right{padding:0;min-width:0}.ahero-right .lead{max-width:none}}
 
 /* Story sections */
 .article{max-width:1280px;margin:0 auto;padding:clamp(10px,2vw,20px) clamp(20px,5vw,40px) 0}
@@ -50,6 +52,15 @@ body{line-height:1.9}
   .cols{align-items:stretch}
   .cols .pic .spic{position:-webkit-sticky;position:sticky;top:120px}
 }
+/* ロゴ切替: 1280超はヒーロー右上のはじ／1280以下は名前の横（横並び） */
+@media(min-width:1281px){.namebox .co-logo{display:none}}
+@media(max-width:1280px){.co-logo-pc{display:none}.namebox{display:flex;align-items:center;gap:14px;margin:12px 0 6px}.namebox .jp{margin-bottom:2px}.namebox .aff{margin-bottom:0}}
+/* SP: 縦積みにして画像を本文の上に（本文下に埋もれないように）。画像は比率維持・トリミングなし */
+@media(max-width:720px){
+  .cols{flex-direction:column;gap:20px}
+  .cols .pic,.cols.rev .pic{order:-1}
+  .cols .txt,.cols .pic{width:100%;min-width:0}
+}
 .spic{position:relative;border-radius:14px;overflow:hidden;line-height:0}
 .spic::after{content:none}
 .spic .tag{position:absolute;top:12px;left:12px;z-index:1;font-family:var(--util);font-size:9px;letter-spacing:1px;color:#fff;background:rgba(255,255,255,.22);padding:4px 9px;border-radius:20px}
@@ -58,9 +69,11 @@ body{line-height:1.9}
 .spic .phf,.gph .phf{transition:transform .5s ease}
 .spic:hover .phf,.gph:hover .phf{transform:scale(1.05)}
 
-/* full-bleed gallery strip */
-.gallery{display:flex;gap:0;margin:clamp(40px,6vw,72px) 0;width:100%;overflow-x:auto}
-.gph{position:relative;flex:1 1 19%;min-width:160px;height:clamp(150px,18vw,200px);overflow:hidden;line-height:0}
+/* full-bleed gallery — トップのスライダーと同じ自動スクロール（CSSマーキー） */
+.gallery{margin:clamp(40px,6vw,72px) 0;width:100%;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.gallery .gtrack{display:flex;gap:0;width:max-content;will-change:transform;transform:translateZ(0);backface-visibility:hidden;animation:gslide 36s linear infinite}
+@keyframes gslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.gph{position:relative;flex:0 0 auto;width:clamp(220px,30vw,300px);height:clamp(150px,18vw,200px);overflow:hidden;line-height:0}
 .gph .tag{position:absolute;bottom:10px;left:10px;font-family:var(--util);font-size:9px;letter-spacing:1px;color:#fff;background:rgba(0,0,0,.3);padding:3px 8px;border-radius:14px}
 
 /* closing statement */
