@@ -23,7 +23,7 @@ add_action( 'init', function () {
 		'has_archive'   => false,
 		'menu_position' => 5,
 		'menu_icon'     => 'dashicons-groups',
-		'supports'      => array( 'title', 'thumbnail', 'page-attributes' ), // title=氏名, thumbnail=人物写真, menu_order=並び順
+		'supports'      => array( 'title', 'editor', 'thumbnail', 'page-attributes' ), // title=氏名, editor=記事本文, thumbnail=人物写真, menu_order=並び順
 		'rewrite'       => array( 'slug' => 'leaders' ),
 		'show_in_rest'  => true,
 	) );

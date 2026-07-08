@@ -1,6 +1,7 @@
 <?php
 /**
  * リーダー個別ページ（インタビュー記事）
+ * ヒーロー = ACFフィールド / 記事本文 = 投稿本文（エディタ）
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 $uri = get_template_directory_uri();
@@ -44,84 +45,9 @@ while ( have_posts() ) : the_post();
 		</div>
 	</section>
 
-	<?php
-	/* ---- 本文: ACF PRO のリピーターがあればそれを、無ければ投稿本文にフォールバック ---- */
-	$has_stories = function_exists( 'have_rows' ) && have_rows( 'story_sections' );
-	if ( $has_stories ) {
-		echo '<div class="article">';
-		$sidx = 0;
-		while ( have_rows( 'story_sections' ) ) : the_row();
-			$heading = get_sub_field( 'heading' );
-			$side    = get_sub_field( 'side_image' );
-			echo '<div class="mystory reveal"><b><i>MY STORY</i></b></div>';
-			if ( $heading ) {
-				echo '<h2 class="story-h reveal">' . esc_html( $heading ) . '</h2>';
-			}
-
-			// Q&A ブロック
-			ob_start();
-			echo '<div class="qa">';
-			if ( have_rows( 'qa' ) ) {
-				while ( have_rows( 'qa' ) ) : the_row();
-					$question = get_sub_field( 'question' );
-					$answer   = get_sub_field( 'answer' );
-					if ( $question ) {
-						echo '<div class="q"><span class="mk">Q</span><span class="qt">' . esc_html( $question ) . '</span></div>';
-					}
-					if ( $answer ) {
-						echo '<div class="a"><span class="mk">A</span>' . wpautop( esc_html( $answer ) ) . '</div>';
-					}
-				endwhile;
-			}
-			echo '</div>';
-			$qa_html = ob_get_clean();
-
-			if ( $side ) {
-				$rev = ( $sidx % 2 === 1 ) ? ' rev' : '';
-				echo '<div class="cols' . $rev . ' reveal"><div class="txt">' . $qa_html . '</div>';
-				echo '<div class="pic"><div class="spic"><img class="phf" src="' . esc_url( $side ) . '" alt=""></div></div></div>';
-			} else {
-				echo '<div class="reveal">' . $qa_html . '</div>';
-			}
-			$sidx++;
-		endwhile;
-		echo '</div>';
-
-		/* ---- ギャラリー（自動スクロール帯） ---- */
-		$gallery = kml_field( 'gallery' );
-		if ( $gallery && is_array( $gallery ) ) {
-			echo '<div class="gallery reveal" aria-hidden="true"><div class="gtrack">';
-			// シームレスループのため2周ぶん出力
-			for ( $rep = 0; $rep < 2; $rep++ ) {
-				foreach ( $gallery as $g ) {
-					$src = is_array( $g ) ? ( $g['url'] ?? '' ) : $g;
-					if ( $src ) {
-						echo '<div class="gph"><img loading="lazy" decoding="async" class="phf" src="' . esc_url( $src ) . '" alt=""></div>';
-					}
-				}
-			}
-			echo '</div></div>';
-		}
-
-		/* ---- 締めのメッセージ ---- */
-		$closing = kml_field( 'closing' );
-		if ( $closing ) {
-			echo '<div class="article">';
-			echo '<div class="mystory reveal"><b><i>MY STORY</i></b></div>';
-			echo '<h2 class="story-h reveal">＜若者へのメッセージ＞</h2>';
-			echo '<div class="closing reveal">' . wpautop( esc_html( $closing ) ) . '</div>';
-			echo '</div>';
-		}
-
-	} else {
-		// ACF PRO 無し or 未入力 → 投稿本文をそのまま記事本文に
-		echo '<div class="article"><div class="cms-body reveal">';
-		the_content();
-		echo '</div></div>';
-	}
-	?>
-
+	<!-- 記事本文（投稿本文エディタで管理） -->
 	<div class="article">
+		<div class="cms-body reveal"><?php the_content(); ?></div>
 		<div class="backwrap reveal"><a class="backbtn" href="<?php echo esc_url( home_url( '/#leaders' ) ); ?>">← 一覧へ戻る</a></div>
 	</div>
 

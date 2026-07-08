@@ -1,5 +1,5 @@
 .DS_Store
 **/.DS_Store
 
-# WordPressテーマのビルド生成物(zip)は版管理しない（wp-theme/ のソースは管理する）
-wp-theme/*.zip
+# ビルド生成物(zip)は版管理しない（wp-theme/ のソースは管理する）
+*.zip

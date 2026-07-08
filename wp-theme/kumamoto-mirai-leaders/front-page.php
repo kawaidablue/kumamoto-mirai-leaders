@@ -18,7 +18,7 @@ get_header();
   <div class="field" id="field" aria-hidden="true"></div>
   <div class="fv-core">
     <span class="sticker">SELECTED</span>
-    <img class="fv-logo" src="<?php echo esc_url( $uri ); ?>/assets/img/asset-03.svg" alt="熊本未来リーダーズ">
+    <img class="fv-logo" src="<?php echo esc_url( kml_fv_logo() ); ?>" alt="熊本未来リーダーズ">
   </div>
   <a class="fv-scroll" href="#concept" aria-label="下へスクロール"><span></span><span></span></a>
 </section>

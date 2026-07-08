@@ -1,6 +1,6 @@
 {
   "key": "group_kml_leader",
-  "title": "リーダー情報",
+  "title": "リーダー情報（ヒーロー）",
   "fields": [
     {
       "key": "field_kml_en",
@@ -38,7 +38,6 @@
       "name": "lead",
       "type": "textarea",
       "rows": 4,
-      "new_lines": "",
       "required": 0
     },
     {
@@ -57,72 +56,6 @@
       "preview_size": "medium",
       "library": "all",
       "required": 0
-    },
-    {
-      "key": "field_kml_stories",
-      "label": "MY STORY（本文セクション）",
-      "name": "story_sections",
-      "type": "repeater",
-      "instructions": "セクションを追加。1セクション＝見出し＋Q&A（＋任意の写真）。※リピーターはACF PROの機能です。ACF無料版の場合はここは表示されず、投稿本文エディタが記事本文になります。",
-      "layout": "block",
-      "button_label": "セクションを追加",
-      "sub_fields": [
-        {
-          "key": "field_kml_st_heading",
-          "label": "見出し",
-          "name": "heading",
-          "type": "text",
-          "required": 0
-        },
-        {
-          "key": "field_kml_st_qa",
-          "label": "Q&A",
-          "name": "qa",
-          "type": "repeater",
-          "layout": "block",
-          "button_label": "Q&Aを追加",
-          "sub_fields": [
-            {
-              "key": "field_kml_qa_q",
-              "label": "質問(Q)",
-              "name": "question",
-              "type": "textarea",
-              "rows": 2
-            },
-            {
-              "key": "field_kml_qa_a",
-              "label": "回答(A)",
-              "name": "answer",
-              "type": "textarea",
-              "rows": 6
-            }
-          ]
-        },
-        {
-          "key": "field_kml_st_img",
-          "label": "横に添える写真（任意）",
-          "name": "side_image",
-          "type": "image",
-          "return_format": "url",
-          "preview_size": "medium"
-        }
-      ]
-    },
-    {
-      "key": "field_kml_gallery",
-      "label": "ギャラリー（自動スクロール帯・任意）",
-      "name": "gallery",
-      "type": "gallery",
-      "instructions": "複数画像を追加すると記事下部に自動スクロールの帯で表示。※ギャラリーはACF PROの機能です。",
-      "return_format": "url"
-    },
-    {
-      "key": "field_kml_closing",
-      "label": "締めのメッセージ（任意）",
-      "name": "closing",
-      "type": "textarea",
-      "rows": 5,
-      "new_lines": "wpautop"
     }
   ],
   "location": [
@@ -135,10 +68,10 @@
     ]
   ],
   "menu_order": 0,
-  "position": "normal",
+  "position": "acf_after_title",
   "style": "default",
   "label_placement": "top",
   "active": true,
-  "description": "",
-  "modified": 1751500000
+  "description": "記事本文（MY STORY・Q&A・写真・締め）は下の本文エディタで作成します。",
+  "modified": 1751540000
 }

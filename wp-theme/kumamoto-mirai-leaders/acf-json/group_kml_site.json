@@ -1,0 +1,33 @@
+{
+  "key": "group_kml_site",
+  "title": "サイト設定",
+  "fields": [
+    {
+      "key": "field_kml_fv_logo",
+      "label": "FVロゴ（トップでほわっと出るロゴ）",
+      "name": "fv_logo",
+      "type": "image",
+      "instructions": "トップページのファーストビューに表示するロゴ画像。未設定なら既定ロゴ(asset-03.svg)を使用。SVG/PNG推奨。",
+      "return_format": "url",
+      "preview_size": "medium",
+      "library": "all",
+      "required": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "kml-site-settings"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "active": true,
+  "description": "テーマ全体の設定（ACF PROのオプションページ機能が必要）",
+  "modified": 1751540100
+}

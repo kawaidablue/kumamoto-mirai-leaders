@@ -63,6 +63,32 @@ add_filter( 'acf/settings/load_json', function ( $paths ) {
 	return $paths;
 } );
 
+// ACFオプションページ「サイト設定」（FVロゴ等の全体設定）※ acf_add_options_page は ACF PRO
+add_action( 'acf/init', function () {
+	if ( function_exists( 'acf_add_options_page' ) ) {
+		acf_add_options_page( array(
+			'page_title' => 'サイト設定（熊本未来リーダーズ）',
+			'menu_title' => 'サイト設定',
+			'menu_slug'  => 'kml-site-settings',
+			'capability' => 'edit_theme_options',
+			'redirect'   => false,
+			'icon_url'   => 'dashicons-admin-customizer',
+			'position'   => 59,
+		) );
+	}
+} );
+
+/**
+ * FVロゴのURLを返す（ACFオプション優先、無ければ既定ロゴ）
+ */
+function kml_fv_logo() {
+	$url = function_exists( 'get_field' ) ? get_field( 'fv_logo', 'option' ) : '';
+	if ( ! $url ) {
+		$url = get_template_directory_uri() . '/assets/img/asset-03.svg';
+	}
+	return $url;
+}
+
 /* ------------------------------------------------------------------
  * 管理画面: ACF未導入なら通知
  * ---------------------------------------------------------------- */
